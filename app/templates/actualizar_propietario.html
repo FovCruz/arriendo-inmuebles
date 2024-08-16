@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Actualizar Propietario</title>
+</head>
+<body>
+    <h1>Actualizar Propietario</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ propietario.nombre }}"><br>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" value="{{ propietario.correo }}"><br>
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>

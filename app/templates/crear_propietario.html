@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Propietario</title>
+</head>
+<body>
+    <h1>Crear Nuevo Propietario</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo"><br>
+        <button type="submit">Crear</button>
+    </form>
+</body>
+</html>

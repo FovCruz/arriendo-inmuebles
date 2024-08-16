@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_inmobiliaria',  # Nombre de tu base de datos
+        'USER': 'postgres',  # El usuario de la base de datos
+        'PASSWORD': '123456',  # La contraseña del usuario
+        'HOST': 'localhost',
+        'PORT': '5432',  # El puerto de PostgreSQL, el valor por defecto es 5432
     }
 }
 
