@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Vivienda</title>
+</head>
+<body>
+    <h1>Crear Nueva Vivienda</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="direccion">Dirección:</label>
+        <input type="text" id="direccion" name="direccion" required><br>
+
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="ciudad" name="ciudad" required><br>
+
+        <label for="precio">Precio:</label>
+        <input type="number" step="0.01" id="precio" name="precio" required><br>
+
+        <label for="propietario">Propietario:</label>
+        <select id="propietario" name="propietario_id" required>
+            {% for propietario in propietarios %}
+                <option value="{{ propietario.id }}">{{ propietario.nombre }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Crear</button>
+    </form>
+</body>
+</html>

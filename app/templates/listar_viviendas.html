@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Viviendas</title>
+</head>
+<body>
+    <h1>Viviendas Disponibles</h1>
+    <ul>
+        {% for vivienda in viviendas %}
+            <li>{{ vivienda.direccion }} - {{ vivienda.ciudad }} - {{ vivienda.precio }}</li>
+            <a href="{% url 'actualizar_vivienda' vivienda.id %}">Editar</a>
+            <a href="{% url 'eliminar_vivienda' vivienda.id %}">Eliminar</a>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'crear_vivienda' %}">Agregar nueva vivienda</a>
+</body>
+</html>
