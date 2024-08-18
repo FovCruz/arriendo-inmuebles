@@ -1,0 +1,97 @@
+[
+    {
+        "model": "app.propietario",
+        "pk": 1,
+        "fields": {
+            "nombre": "Propietario Uno",
+            "correo": "propietario1@gmail.com"
+        }
+    },
+    {
+        "model": "app.propietario",
+        "pk": 2,
+        "fields": {
+            "nombre": "Propietario Dos",
+            "correo": "propietario2@gmail.com"
+        }
+    },
+    {
+        "model": "app.propietario",
+        "pk": 3,
+        "fields": {
+            "nombre": "Propietario Tres",
+            "correo": "propietario3@gmail.com"
+        }
+    },
+    {
+        "model": "app.propietario",
+        "pk": 4,
+        "fields": {
+            "nombre": "Propietario Cuatro",
+            "correo": "propietario4@gmail.com"
+        }
+    },
+    {
+        "model": "app.propietario",
+        "pk": 5,
+        "fields": {
+            "nombre": "Propietario Cinco",
+            "correo": "propietario5@gmail.com"
+        }
+    },
+    {
+        "model": "app.vivienda",
+        "pk": 1,
+        "fields": {
+            "direccion": "Calle Falsa 123",
+            "ciudad": "Quillota",
+            "precio": "100000.00",
+            "propietario": 1,
+            "comuna": 1
+        }
+    },
+    {
+        "model": "app.vivienda",
+        "pk": 2,
+        "fields": {
+            "direccion": "Avenida Siempre Viva 742",
+            "ciudad": "Viña",
+            "precio": "150000.00",
+            "propietario": 2,
+            "comuna": 2
+        }
+    },
+    {
+        "model": "app.vivienda",
+        "pk": 3,
+        "fields": {
+            "direccion": "Calle Los Pinos 456",
+            "ciudad": "Santiago",
+            "precio": "200000.00",
+            "propietario": 3,
+            "comuna": 3
+        }
+    },
+    {
+        "model": "app.vivienda",
+        "pk": 4,
+        "fields": {
+            "direccion": "Calle Almendra 789",
+            "ciudad": "Arica",
+            "precio": "250000.00",
+            "propietario": 4,
+            "comuna": 4
+        }
+    },
+    {
+        "model": "app.vivienda",
+        "pk": 5,
+        "fields": {
+            "direccion": "Calle Roble 101",
+            "ciudad": "concon",
+            "precio": "300000.00",
+            "propietario": 5,
+            "comuna": 5
+        }
+    }
+]

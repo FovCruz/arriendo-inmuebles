@@ -1,0 +1,16 @@
+--- Arica y Parinacota ---
+Dirección: Avenida Siempre Viva 742, Ciudad: Viña, Precio: 150000.00, Tipo: Casa
+Dirección: Calle Almendra 789, Ciudad: Arica, Precio: 250000.00, Tipo: Casa
+Dirección: Calle Falsa 123, Ciudad: Quillota, Precio: 100000.00, Tipo: Casa
+Dirección: Calle Los Pinos 456, Ciudad: Santiago, Precio: 200000.00, Tipo: Casa
+
+--- Coquimbo ---
+Dirección: casa_serena, Ciudad: ciudad_serena, Precio: 2000.00, Tipo: Casa
+
+--- Tarapacá ---
+Dirección: Calle Roble 101, Ciudad: concon, Precio: 300000.00, Tipo: Casa
+
+--- Valparaíso ---
+Dirección: casa_quillota, Ciudad: ciudad_quillota, Precio: 8000.00, Tipo: Casa
+Dirección: casa_viña, Ciudad: ciudad_viña, Precio: 6000.00, Tipo: Casa
+Dirección: Diego Portales 34, Ciudad: Quintero, Precio: 45000.00, Tipo: Terreno

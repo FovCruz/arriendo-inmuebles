@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Inmuebles por Comuna</title>
+</head>
+<body>
+    <h1>Listado de Inmuebles por Comuna</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Dirección</th>
+                <th>Comuna</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inmueble in inmuebles %}
+            <tr>
+                <td>{{ inmueble.direccion }}</td>
+                <td>{{ inmueble.comuna.nombre }}</td>
+                <td>{{ inmueble.precio }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

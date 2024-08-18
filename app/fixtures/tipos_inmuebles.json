@@ -1,0 +1,30 @@
+[
+    {
+        "model": "app.tipoinmueble",
+        "pk": 1,
+        "fields": {
+            "nombre": "Casa"
+        }
+    },
+    {
+        "model": "app.tipoinmueble",
+        "pk": 2,
+        "fields": {
+            "nombre": "Departamento"
+        }
+    },
+    {
+        "model": "app.tipoinmueble",
+        "pk": 3,
+        "fields": {
+            "nombre": "Oficina"
+        }
+    },
+    {
+        "model": "app.tipoinmueble",
+        "pk": 4,
+        "fields": {
+            "nombre": "Terreno"
+        }
+    }
+]

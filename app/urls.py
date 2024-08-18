@@ -10,4 +10,6 @@ urlpatterns = [
     path('viviendas/crear/', views.crear_vivienda, name='crear_vivienda'),
     path('viviendas/actualizar/<int:id>/', views.actualizar_vivienda, name='actualizar_vivienda'),
     path('viviendas/eliminar/<int:id>/', views.eliminar_vivienda, name='eliminar_vivienda'),
+    path('inmuebles/comunas/', views.listar_inmuebles_por_comuna, name='listar_inmuebles_comunas'),
+    path('ajax/load-comunas/', views.load_comunas, name='ajax_load_comunas'),  # Esta URL para AJAX
 ]

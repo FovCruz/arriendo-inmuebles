@@ -1,0 +1,3 @@
+Comuna: Arica, Dirección: tomas direccion, Precio: 1500.00
+Comuna: Arica, Dirección: nueva vivienda en vista, Precio: 1000.00
+Comuna: Arica, Dirección: casa de prueba, Precio: 1500.00
