@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Perfil de <span class="text-capitalize">{{ user.username }}</span></h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h5>Email:</h5>
+                            <p>{{ user.email }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Nombre:</h5>
+                            <p class="text-capitalize">{{ user.first_name }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h5>Apellido:</h5>
+                            <p class="text-capitalize">{{ user.last_name }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {% if es_propietario %}
+                                <h5>Rol:</h5>
+                                <p>Propietario</p>
+                            {% elif es_arrendatario %}
+                                <h5>Rol:</h5>
+                                <p>Arrendatario</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <a href="{% url 'modificar_perfil' %}" class="btn btn-warning">Modificar Perfil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

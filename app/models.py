@@ -25,7 +25,7 @@ class TipoInmueble(models.Model):
 
     def __str__(self):
         return self.nombre
-    
+
 class Vivienda(models.Model):
     direccion = models.CharField(max_length=255)
     ciudad = models.CharField(max_length=100)

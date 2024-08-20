@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load form_filters %}
+
+{% block title %}Modificar Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Modificar Perfil</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.first_name.label_tag }} <!-- Etiqueta para el campo de nombre -->
+                            {{ form.first_name|add_class:"form-control" }} <!-- Campo de nombre -->
+                        </div>
+                        <div class="mb-3">
+                            {{ form.last_name.label_tag }} <!-- Etiqueta para el campo de apellido -->
+                            {{ form.last_name|add_class:"form-control" }} <!-- Campo de apellido -->
+                        </div>
+                        <div class="mb-3">
+                            {{ form.email.label_tag }} <!-- Etiqueta para el campo de email -->
+                            {{ form.email|add_class:"form-control" }} <!-- Campo de email -->
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}Propietarios{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Propietarios</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        {% for propietario in propietarios %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h5 class="mb-1">{{ propietario.nombre }}</h5>
+                                    <p class="mb-0 text-muted">{{ propietario.correo }}</p>
+                                </div>
+                                <div>
+                                    <a href="{% url 'actualizar_propietario' propietario.id %}" class="btn btn-warning btn-sm me-2">Editar</a>
+                                    <a href="{% url 'eliminar_propietario' propietario.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{% url 'crear_propietario' %}" class="btn btn-success">Agregar nuevo propietario</a>
+                </div>
+            </div>
+            
+            <!-- Paginación -->
+            <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if propietarios.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1" aria-label="First">
+                                <span aria-hidden="true">&laquo;&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ propietarios.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">&laquo;&laquo;</span></li>
+                        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    
+                    {% for num in propietarios.paginator.page_range %}
+                        {% if propietarios.number == num %}
+                            <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if propietarios.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ propietarios.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ propietarios.paginator.num_pages }}" aria-label="Last">
+                                <span aria-hidden="true">&raquo;&raquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                        <li class="page-item disabled"><span class="page-link">&raquo;&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

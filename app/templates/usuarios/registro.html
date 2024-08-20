@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load form_filters %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Registro de Usuario</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="username" class="form-label">Nombre de Usuario:</label>
+                                {{ form.username|add_class:"form-control" }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Correo Electrónico:</label>
+                                {{ form.email|add_class:"form-control" }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="password1" class="form-label">Contraseña:</label>
+                                {{ form.password1|add_class:"form-control" }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password2" class="form-label">Confirmar Contraseña:</label>
+                                {{ form.password2|add_class:"form-control" }}
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="tipo_usuario" class="form-label">Tipo de Usuario:</label>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="tipo_usuario" id="tipo_propietario" value="propietario" {% if form.tipo_usuario.value == "propietario" %}checked{% endif %}>
+                                    <label class="form-check-label" for="tipo_propietario">
+                                        Propietario
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input" name="tipo_usuario" id="tipo_arrendatario" value="arrendatario" {% if form.tipo_usuario.value == "arrendatario" %}checked{% endif %}>
+                                    <label class="form-check-label" for="tipo_arrendatario">
+                                        Arrendatario
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Registrarse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

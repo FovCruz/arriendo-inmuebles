@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load form_filters %}
+{% block title %}Crear Nueva Vivienda{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Iniciar Sesión</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            {{ form.username.label_tag }}  <!-- Etiqueta para el campo de nombre de usuario -->
+                            {{ form.username|add_class:"form-control" }} <!-- Campo de nombre de usuario -->
+                        </div>
+                        <div class="mb-3">
+                            {{ form.password.label_tag }}  <!-- Etiqueta para el campo de contraseña -->
+                            {{ form.password|add_class:"form-control" }} <!-- Campo de contraseña -->
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Iniciar Sesión</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

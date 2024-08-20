@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Actualizar Vivienda{% endblock %}
+
+{% block content %}
+<h1>Actualizar Vivienda</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" name="direccion" value="{{ vivienda.direccion }}" required><br>
+
+    <label for="ciudad">Ciudad:</label>
+    <input type="text" id="ciudad" name="ciudad" value="{{ vivienda.ciudad }}" required><br>
+
+    <label for="precio">Precio:</label>
+    <input type="number" step="0.01" id="precio" name="precio" value="{{ vivienda.precio }}" required><br>
+
+    <label for="propietario">Propietario:</label>
+    <select id="propietario" name="propietario_id" required>
+        {% for propietario in propietarios %}
+        <option value="{{ propietario.id }}" {% if propietario.id==vivienda.propietario.id %}selected{% endif %}>{{
+            propietario.nombre }}</option>
+        {% endfor %}
+    </select><br>
+
+    <button type="submit">Actualizar</button>
+</form>
+{% endblock %}

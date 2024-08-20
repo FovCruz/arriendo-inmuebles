@@ -1,0 +1,69 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        {% if es_propietario %}
+            <a class="navbar-brand" href="{% url 'propietarios_home' %}">Inmobiliaria</a>
+        {% elif es_arrendatario %}
+            <a class="navbar-brand" href="{% url 'arrendatarios_home' %}">Inmobiliaria</a>
+        {% else %}
+            <a class="navbar-brand" href="{% url 'login' %}">Inmobiliaria</a>
+        {% endif %}
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if es_propietario %}
+                    <!-- Menú para Propietario -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'propietarios_home' %}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPropietarios" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Propietarios
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownPropietarios">
+                            <li><a class="dropdown-item" href="{% url 'listar_propietarios' %}">Propietarios</a></li>
+                            <li><a class="dropdown-item" href="{% url 'crear_propietario' %}">Crear Propietario</a></li>
+                        </ul>
+                    </li>
+                {% elif es_arrendatario %}
+                    <!-- Menú para Arrendatario -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'arrendatarios_home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_viviendas' %}">Viviendas disponibles</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+            <!-- Botones de Login, Registro o Logout al costado derecho -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                    <p class="fs-5 text-capitalize text-white my-1 me-4">Bienvenid@ {{ user.get_username }}</p>
+
+                    <li class="nav-item">
+                        <a class="btn btn-success me-2" href="{% url 'perfil' %}">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <form method="POST" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="btn btn-success me-2" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="{% url 'registro' %}">Registro</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
