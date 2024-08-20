@@ -1,15 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vivienda, Propietario, Comuna, Region, TipoInmueble, Arrendatario
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from .forms import LoginForm, RegistroForm, ModificarPerfilForm, ArrendatarioForm, PropietarioForm
 from django.core.paginator import Paginator
+from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import Group
+from django.http import HttpResponseForbidden
+
 
 
 def home(request):
+    if request.user.is_authenticated:
+        if request.user.groups.filter(name='Propietario').exists():
+            return redirect('propietarios_home')
+        elif request.user.groups.filter(name='Arrendatario').exists():
+            return redirect('arrendatarios_home')
     return render(request, 'home.html')
+
 
 
 @login_required
@@ -134,18 +143,47 @@ def load_comunas(request):
     return render(request, 'inmuebles/comuna_dropdown_list_options.html', {'comunas': comunas})
 
 
+# Vista para listar viviendas
 def listar_viviendas(request):
     viviendas = Vivienda.objects.all()
-    paginator = Paginator(viviendas, 4)  # Muestra 4 propietarios por página
 
+    # Filtros de búsqueda
+    region_id = request.GET.get('region')
+    comuna_id = request.GET.get('comuna')
+
+    if region_id:
+        viviendas = viviendas.filter(comuna__region_id=region_id)
+    if comuna_id:
+        viviendas = viviendas.filter(comuna_id=comuna_id)
+
+    paginator = Paginator(viviendas, 4)  # Muestra 4 viviendas por página
     page_number = request.GET.get('page')
     viviendas = paginator.get_page(page_number)
 
-    return render(request, 'inmuebles/listar_viviendas.html', {'viviendas': viviendas})
+    regiones = Region.objects.all()  # Asegúrate de pasar todas las regiones al template
+    comunas = Comuna.objects.all()   # Si quieres que estén disponibles al cargar la página
+
+    # Comprueba si es una solicitud AJAX
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        html = render_to_string('inmuebles/viviendas_table.html', {'viviendas': viviendas})
+        return JsonResponse({'html': html})
+
+    return render(request, 'inmuebles/listar_viviendas.html', {
+        'viviendas': viviendas,
+        'regiones': regiones,
+        'comunas': comunas,
+    })
 
 
+
+
+# Vista para actualizar vivienda
+@login_required
 def actualizar_vivienda(request, id):
-    vivienda = Vivienda.objects.get(id=id)
+    vivienda = get_object_or_404(Vivienda, id=id)
+    if not request.user.groups.filter(name='Propietario').exists() or vivienda.propietario.correo != request.user.email:
+        return HttpResponseForbidden("No tienes permiso para modificar esta vivienda.")
+    
     propietarios = Propietario.objects.all()
 
     if request.method == 'POST':
@@ -158,11 +196,16 @@ def actualizar_vivienda(request, id):
 
     return render(request, 'inmuebles/actualizar_vivienda.html', {'vivienda': vivienda, 'propietarios': propietarios})
 
-
+# Vista para eliminar vivienda
+@login_required
 def eliminar_vivienda(request, id):
-    vivienda = Vivienda.objects.get(id=id)
+    vivienda = get_object_or_404(Vivienda, id=id)
+    if not request.user.groups.filter(name='Propietario').exists() or vivienda.propietario.correo != request.user.email:
+        return HttpResponseForbidden("No tienes permiso para eliminar esta vivienda.")
+    
     vivienda.delete()
     return redirect('listar_viviendas')
+
 
 
 def crear_propietario(request):

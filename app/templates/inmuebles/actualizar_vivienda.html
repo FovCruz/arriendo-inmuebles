@@ -3,26 +3,49 @@
 {% block title %}Actualizar Vivienda{% endblock %}
 
 {% block content %}
-<h1>Actualizar Vivienda</h1>
-<form method="post">
-    {% csrf_token %}
-    <label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion" value="{{ vivienda.direccion }}" required><br>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h3 class="mb-0">Actualizar Vivienda</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label fw-bold">Dirección:</label>
+                            <input type="text" id="direccion" name="direccion" value="{{ vivienda.direccion }}" class="form-control" required>
+                        </div>
 
-    <label for="ciudad">Ciudad:</label>
-    <input type="text" id="ciudad" name="ciudad" value="{{ vivienda.ciudad }}" required><br>
+                        <div class="mb-3">
+                            <label for="ciudad" class="form-label fw-bold">Ciudad:</label>
+                            <input type="text" id="ciudad" name="ciudad" value="{{ vivienda.ciudad }}" class="form-control" required>
+                        </div>
 
-    <label for="precio">Precio:</label>
-    <input type="number" step="0.01" id="precio" name="precio" value="{{ vivienda.precio }}" required><br>
+                        <div class="mb-3">
+                            <label for="precio" class="form-label fw-bold">Precio:</label>
+                            <input type="number" step="0.01" id="precio" name="precio" value="{{ vivienda.precio }}" class="form-control" required>
+                        </div>
 
-    <label for="propietario">Propietario:</label>
-    <select id="propietario" name="propietario_id" required>
-        {% for propietario in propietarios %}
-        <option value="{{ propietario.id }}" {% if propietario.id==vivienda.propietario.id %}selected{% endif %}>{{
-            propietario.nombre }}</option>
-        {% endfor %}
-    </select><br>
+                        <div class="mb-3">
+                            <label for="propietario" class="form-label fw-bold">Propietario:</label>
+                            <select id="propietario" name="propietario_id" class="form-select" required>
+                                {% for propietario in propietarios %}
+                                <option value="{{ propietario.id }}" {% if propietario.id == vivienda.propietario.id %}selected{% endif %}>
+                                    {{ propietario.nombre }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-    <button type="submit">Actualizar</button>
-</form>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

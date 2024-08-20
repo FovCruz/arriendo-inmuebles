@@ -3,73 +3,90 @@
 {% block title %}Viviendas Disponibles{% endblock %}
 
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+    <div class="row">
+        <!-- Filtros -->
+        <div class="col-md-3">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4 class="mb-0">Filtrar Viviendas</h4>
+                </div>
+                <div class="card-body">
+                    <form id="filterForm">
+                        <div class="mb-3">
+                            <label for="regionFilter" class="form-label">Región:</label>
+                            <select id="regionFilter" name="region" class="form-select">
+                                <option value="">Todas las regiones</option>
+                                {% for region in regiones %}
+                                <option value="{{ region.id }}">{{ region.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="comunaFilter" class="form-label">Comuna:</label>
+                            <select id="comunaFilter" name="comuna" class="form-select">
+                                <option value="">Todas las comunas</option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="button" id="applyFilters" class="btn btn-primary">Aplicar Filtros</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resultados -->
+        <div class="col-md-9">
             <div class="card shadow-sm">
                 <div class="card-header bg-dark text-white text-center">
                     <h3 class="mb-0">Viviendas Disponibles</h3>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Dirección</th>
-                                    <th>Ciudad</th>
-                                    <th>Precio</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for vivienda in viviendas %}
-                                <tr>
-                                    <td>{{ vivienda.direccion }}</td>
-                                    <td>{{ vivienda.ciudad }}</td>
-                                    <td>{{ vivienda.precio }}</td>
-                                    <td>
-                                        <a href="{% url 'actualizar_vivienda' vivienda.id %}" class="btn btn-warning btn-sm">Editar</a>
-                                        <a href="{% url 'eliminar_vivienda' vivienda.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- Paginación -->
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-                            {% if viviendas.has_previous %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ viviendas.previous_page_number }}" aria-label="Previous">
-                                    &laquo;
-                                </a>
-                            </li>
-                            {% endif %}
-                            
-                            {% for num in viviendas.paginator.page_range %}
-                            <li class="page-item {% if viviendas.number == num %}active{% endif %}">
-                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                            </li>
-                            {% endfor %}
-                            
-                            {% if viviendas.has_next %}
-                            <li class="page-item">
-                                <a class="page-link" href="?page={{ viviendas.next_page_number }}" aria-label="Next">
-                                    &raquo;
-                                </a>
-                            </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                    
-                    <div class="d-grid mt-3">
-                        <a href="{% url 'crear_vivienda' %}" class="btn btn-success">Agregar nueva vivienda</a>
+                    <div id="viviendasList" class="table-responsive">
+                        {% include 'inmuebles/viviendas_table.html' %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Actualizar comunas cuando se selecciona una región
+        $("#regionFilter").change(function() {
+            var regionId = $(this).val();
+            $.ajax({
+                url: "{% url 'ajax_load_comunas' %}",
+                data: {'region': regionId},
+                success: function(data) {
+                    $("#comunaFilter").html(data);
+                }
+            });
+        });
+
+        // Aplicar filtros
+        $("#applyFilters").click(function() {
+            var regionId = $("#regionFilter").val();
+            var comunaId = $("#comunaFilter").val();
+            $.ajax({
+                url: "{% url 'listar_viviendas' %}",
+                data: {
+                    'region': regionId,
+                    'comuna': comunaId
+                },
+                success: function(data) {
+                    $("#viviendasList").html(data);
+                }
+            });
+        });
+    });
+</script>
+
 {% endblock %}

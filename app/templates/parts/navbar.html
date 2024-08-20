@@ -20,15 +20,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'propietarios_home' %}">Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPropietarios" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Propietarios
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownPropietarios">
-                            <li><a class="dropdown-item" href="{% url 'listar_propietarios' %}">Propietarios</a></li>
-                            <li><a class="dropdown-item" href="{% url 'crear_propietario' %}">Crear Propietario</a></li>
-                        </ul>
+<!--                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_propietarios' %}">Propietarios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'crear_propietario' %}">Crear Propietario</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'listar_viviendas' %}">Gestionar Viviendas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'crear_vivienda' %}">Crear Vivienda</a>
                     </li>
                 {% elif es_arrendatario %}
                     <!-- Menú para Arrendatario -->
